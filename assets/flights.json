@@ -1,0 +1,20 @@
+[
+	{
+        "price" : 100,
+        "flightNumber" : "Al-202",
+        "src" : "PNQ",
+        "dest" : "DEL",
+        "departure" : "10 AM",
+        "depDate" : "10-Mar-2020",
+        "arrival" : "12 PM"
+    },
+    {
+        "price" : 200,
+        "flightNumber" : "Al-203",
+        "src" : "DEL",
+        "dest" : "PNQ",
+        "departure" : "10 AM",
+        "depDate" : "12-Mar-2020",
+        "arrival" : "12 PM"
+    }
+]

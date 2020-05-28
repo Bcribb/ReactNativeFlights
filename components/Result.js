@@ -1,28 +1,41 @@
 import React from 'react';
-import { StyleSheet, Image, Text, View, Button } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, Alert } from 'react-native';
 import Flight from './Flight'
 
-export default Result = (isReturn) => {
+export default Result = ({isReturn, outFlight, inFlight}) => {
+
+    const createAlert = () => {
+        Alert.alert(
+            "Book Flight",
+            "Booked " + (isReturn ? "return" : "one-way") + " flight from " + outFlight.src + " to " + outFlight.dest,
+            [
+                { text: "OK" }
+            ],
+            { cancelable: false }
+        );
+    }
+
     return(
         <View style={containerStyles.result}>
             <View style={containerStyles.leftContainer}>
                 <Text style={contentStyles.price}>
-                    $1000
+                    ${outFlight.price + (isReturn && inFlight.price)}
                 </Text>
                 <View style={containerStyles.flightsContainer}>
-                    <Flight/>
-                    {isReturn && <Flight/>}
+                    <Flight flight={outFlight}/>
+                    {isReturn && <Flight flight={inFlight}/>}
                 </View>
             </View>
             <View style={containerStyles.rightContainer}>
                 <Image
                     style={contentStyles.image}
                     source={
-                        require('./plane.jpg')
+                        require('../assets/plane.jpg')
                     }
                 />
                 <Button
-                    title={'Book'}
+                    onPress={createAlert}
+                    title={'Book here'}
                 />
             </View>
         </View>
@@ -47,8 +60,8 @@ const containerStyles = StyleSheet.create({
     },
     flightsContainer: {
         margin: 5,
+        flexDirection: 'row',
         flex: 1,
-        flexDirection: 'row'
     },
     rightContainer: {
         margin: 5,
@@ -61,7 +74,11 @@ const contentStyles = StyleSheet.create({
     image: {
         height: 100,
         width: 100,
-        backgroundColor: "#000"
+        backgroundColor: "#000",
+        borderWidth: 2,
+        borderColor: "#20232a",
+        borderRadius: 2,
+        backgroundColor: "#61dafb"
     },
     price: {
         fontSize: 20
